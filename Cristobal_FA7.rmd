@@ -1,0 +1,57 @@
+---
+title: "Cristobal - Exercise 15.1"
+output: html_document
+date: "2023-04-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercises 15.1 
+
+Use R to solve the following.  
+
+1. A machine produces memory sticks of varying lengths, distributed uniformly
+between 2 and 12 mm. Memory sticks longer than 10 mm do not meet the
+design criterion, and must be scrapped.  
+a). Calculate the probability that a memory stick will be scrapped.  
+```{r}
+p_scrap <- (12-10)/(12-2)
+cat("Probability is: ",p_scrap)
+```
+
+b). Simulate 50 memory stick lengths and obtain a histogram of the simulated  
+values. Calculate the simulated mean and variance. 
+```{r}
+simulation <- runif(50,2,12)
+hist(simulation, main = "Simulation of Lengths", xlab = "millimeters (mm)", col = "maroon", border = "white") 
+```
+
+2. Students in an electronic engineering laboratory measure current in using an
+ammeter. Due to several random factors, the measurement X follows the pdf
+f (x) = 0.025x + b, 2 < x < 6  
+(a). Show that, for this to be a genuine probability density, b = 0.15.  
+  
+```{r}
+
+func <- function(x,b) {out <- .25*x + b}
+integ <- integrate(func, 2, 6, b = .15)
+integ$value
+
+```
+
+(b). Find the probability that the measurement of the current exceeds 3
+```{r}
+func <- function(x,b) {out <- .25*x + b}
+integ <- integrate(func, lower = 2, upper = 3, b = .15)
+prob <- 1 - integ$value
+
+cat("Probability that the current exceeds 3: ", prob)
+
+
+```
+
+
+
+
